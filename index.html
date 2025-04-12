@@ -1,0 +1,1574 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIGIONYX - Agence digitale futuriste</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --primary-color: #2563eb; /* Bleu vif */
+            --secondary-color: #1e293b; /* Bleu foncé */
+            --accent-color: #3b82f6; /* Bleu moyen */
+            --text-color: #1e293b; /* Noir bleuté */
+            --bg-color: #ffffff; /* Blanc */
+            --card-bg: #f8fafc; /* Blanc très légèrement grisé */
+            --border-color: #e2e8f0; /* Gris très clair */
+        }
+
+        .dark-mode {
+            --primary-color: #3b82f6; /* Bleu plus clair en dark mode */
+            --secondary-color: #f8fafc; /* Blanc cassé */
+            --accent-color: #60a5fa; /* Bleu plus clair */
+            --text-color: #f8fafc; /* Blanc cassé */
+            --bg-color: #0f172a; /* Noir bleuté très foncé */
+            --card-bg: #1e293b; /* Bleu foncé */
+            --border-color: #334155; /* Gris bleuté foncé */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.5s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        /* Header */
+        header {
+            padding: 25px 0;
+            background-color: var(--bg-color);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--primary-color);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--text-color);
+            position: relative;
+        }
+
+        .logo span::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary-color);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover span::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 35px;
+            position: relative;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 600;
+            transition: color 0.3s;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 28px;
+            color: var(--text-color);
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            font-size: 22px;
+            color: var(--text-color);
+            cursor: pointer;
+            margin-left: 25px;
+            transition: transform 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(30deg);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 180px 0 120px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
+            z-index: -1;
+            animation: pulse 15s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: translate(0, 0);
+            }
+            50% {
+                transform: translate(50px, 50px);
+            }
+            100% {
+                transform: translate(0, 0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 25px;
+            color: var(--primary-color);
+            line-height: 1.2;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 50px;
+            color: var(--text-color);
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+            position: relative;
+            overflow: hidden;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+        }
+
+        .cta-button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 25%, rgba(255, 255, 255, 0.1) 50%, transparent 75%);
+            background-size: 400% 400%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .cta-button:hover::after {
+            opacity: 1;
+            animation: shine 1.5s infinite;
+        }
+
+        @keyframes shine {
+            0% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .hero-image {
+            margin-top: 60px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+            transform: perspective(1000px) rotateX(5deg);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+        }
+
+        .hero-image:hover {
+            transform: perspective(1000px) rotateX(0deg);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .hero-image img {
+            width: 100%;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .hero-image:hover img {
+            transform: scale(1.03);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .services::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80') center/cover fixed;
+            opacity: 0.03;
+            z-index: -1;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 70px;
+            font-size: 2.8rem;
+            color: var(--primary-color);
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), transparent);
+            border-radius: 3px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .service-card {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-color);
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-card h3 {
+            font-size: 1.7rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .service-card p {
+            margin-bottom: 25px;
+            opacity: 0.9;
+            line-height: 1.7;
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 25px;
+            color: var(--primary-color);
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .service-image {
+            margin-top: 30px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-image img {
+            width: 100%;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .service-card:hover .service-image img {
+            transform: scale(1.05);
+        }
+
+        /* Process Section */
+        .process {
+            padding: 100px 0;
+            background-color: var(--card-bg);
+        }
+
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-top: 60px;
+            position: relative;
+        }
+
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            top: 50px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--border-color));
+            z-index: 1;
+        }
+
+        .process-step {
+            width: 22%;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 25px;
+            transition: all 0.3s ease;
+        }
+
+        .process-step:hover .step-number {
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        .process-step h4 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .process-step p {
+            opacity: 0.9;
+            line-height: 1.7;
+        }
+
+        /* About Section */
+        .about {
+            padding: 120px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.05) 0%, rgba(0, 0, 0, 0) 70%);
+            z-index: -1;
+            animation: pulse-alt 15s infinite alternate;
+        }
+
+        @keyframes pulse-alt {
+            0% {
+                transform: translate(0, 0);
+            }
+            50% {
+                transform: translate(-50px, 50px);
+            }
+            100% {
+                transform: translate(0, 0);
+            }
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2.8rem;
+            margin-bottom: 25px;
+            color: var(--primary-color);
+            line-height: 1.2;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            opacity: 0.9;
+            line-height: 1.7;
+        }
+
+        .about-image {
+            position: relative;
+            perspective: 1000px;
+        }
+
+        .about-image-main {
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+            transform: rotateY(-5deg);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .about-image:hover .about-image-main {
+            transform: rotateY(0deg);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .about-image-main img {
+            width: 100%;
+            display: block;
+            border-radius: 20px;
+            transition: transform 0.5s ease;
+        }
+
+        .about-image:hover .about-image-main img {
+            transform: scale(1.02);
+        }
+
+        .about-image-decoration {
+            position: absolute;
+            width: 80%;
+            height: 80%;
+            border: 3px dashed var(--primary-color);
+            border-radius: 20px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(5deg);
+            opacity: 0.3;
+            z-index: 1;
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 30px 20px;
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover .stat-number {
+            transform: scale(1.1);
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* Portfolio Section */
+        .portfolio {
+            padding: 100px 0;
+            background-color: var(--card-bg);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .portfolio-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.5s ease;
+            height: 300px;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .portfolio-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .portfolio-item:hover .portfolio-image {
+            transform: scale(1.05);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            color: white;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .portfolio-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .portfolio-category {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .testimonials::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80') center/cover fixed;
+            opacity: 0.03;
+            z-index: -1;
+        }
+
+        .testimonials-slider {
+            margin-top: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonial {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            margin: 0 15px;
+            position: relative;
+            border: 1px solid var(--border-color);
+        }
+
+        .testimonial::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 5rem;
+            color: var(--primary-color);
+            opacity: 0.1;
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+
+        .testimonial-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 20px;
+            border: 3px solid var(--primary-color);
+        }
+
+        .author-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .author-info h5 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .author-info p {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 120px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80') center/cover fixed;
+            opacity: 0.03;
+            z-index: -1;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .contact-info {
+            padding-right: 40px;
+        }
+
+        .contact-info h2 {
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            color: var(--primary-color);
+        }
+
+        .contact-info p {
+            margin-bottom: 30px;
+            line-height: 1.7;
+            opacity: 0.9;
+        }
+
+        .contact-details {
+            margin-top: 40px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-right: 20px;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover .contact-icon {
+            transform: rotate(15deg) scale(1.1);
+            background-color: var(--accent-color);
+        }
+
+        .contact-text h4 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .contact-text p {
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        .contact-form {
+            background-color: var(--card-bg);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-form::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.05) 0%, rgba(0, 0, 0, 0) 70%);
+            z-index: -1;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            outline: none;
+        }
+
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 80px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            color: var(--primary-color);
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50%;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+
+        .footer-column p {
+            color: #cbd5e1;
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 15px;
+        }
+
+        .footer-column ul li a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--primary-color);
+            transform: translateX(5px);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            padding-top: 30px;
+            border-top: 1px solid #334155;
+            color: #94a3b8;
+            text-align: center;
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1200px) {
+            .process-step {
+                width: 48%;
+                margin-bottom: 50px;
+            }
+
+            .process-steps::before {
+                display: none;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .about-content,
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image {
+                order: -1;
+            }
+
+            .contact-info {
+                padding-right: 0;
+                text-align: center;
+            }
+
+            .contact-details {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 30px;
+            }
+
+            .contact-item {
+                flex: 1 1 200px;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .contact-icon {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            nav {
+                position: fixed;
+                top: 90px;
+                left: -100%;
+                width: 90%;
+                height: calc(100vh - 90px);
+                background-color: var(--card-bg);
+                box-shadow: 2px 0 20px rgba(0, 0, 0, 0.1);
+                transition: left 0.4s ease;
+                z-index: 999;
+                border-radius: 0 20px 20px 0;
+                padding: 40px 30px;
+            }
+
+            nav.active {
+                left: 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav ul li {
+                margin: 20px 0;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 2.3rem;
+            }
+
+            .services-grid,
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero {
+                padding: 150px 0 80px;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .process-step {
+                width: 100%;
+            }
+
+            .contact-form {
+                padding: 30px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-column h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">DIGI<span>ONYX</span></a>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="#home">Accueil</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#process">Processus</a></li>
+                    <li><a href="#about">À propos</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li>
+                        <button class="theme-toggle" id="themeToggle">
+                            <span id="themeIcon">🌙</span>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1 class="animate__animated animate__fadeInDown">La puissance du digital, sculptée dans l'innovation</h1>
+            <p class="animate__animated animate__fadeIn animate__delay-1s">DIGIONYX est une agence digitale futuriste spécialisée en growth, automation et contenu optimisé. Nous aidons les marques à se développer rapidement grâce à des stratégies innovantes, un branding percutant et des outils digitaux puissants.</p>
+            <a href="#contact" class="cta-button animate__animated animate__fadeInUp animate__delay-2s">Contactez-nous</a>
+            
+            <div class="hero-image animate__animated animate__fadeIn animate__delay-3s">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80" alt="Équipe DIGIONYX au travail">
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <h2 class="section-title fade-in">Nos Services</h2>
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <div class="service-icon">🚀</div>
+                    <h3>Growth Marketing</h3>
+                    <p>Stratégies sur mesure pour accélérer votre croissance et maximiser votre retour sur investissement. Nous identifions les canaux les plus performants pour votre business et optimisons chaque étape de votre funnel.</p>
+                    
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80" alt="Growth Marketing">
+                    </div>
+                    <a href="#contact" class="cta-button">En savoir plus</a>
+                </div>
+                
+                <div class="service-card fade-in">
+                    <div class="service-icon">⚙️</div>
+                    <h3>Automation</h3>
+                    <p>Automatisation de vos processus métiers pour gagner en efficacité et réduire les coûts. Nous intégrons des solutions sur mesure qui vous font gagner du temps sur les tâches répétitives et vous permettent de vous concentrer sur l'essentiel.</p>
+                    
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80" alt="Automation">
+                    </div>
+                    <a href="#contact" class="cta-button">En savoir plus</a>
+                </div>
+                
+                <div class="service-card fade-in">
+                    <div class="service-icon">✍️</div>
+                    <h3>Contenu Optimisé</h3>
+                    <p>Création de contenu engageant et optimisé pour le SEO qui convertit vos visiteurs en clients. Notre approche data-driven nous permet de produire du contenu qui performe, quel que soit votre secteur d'activité.</p>
+                    
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1501504905252-473c47e087f8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80" alt="Contenu Optimisé">
+                    </div>
+                    <a href="#contact" class="cta-button">En savoir plus</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process" id="process">
+        <div class="container">
+            <h2 class="section-title fade-in">Notre Processus</h2>
+            <p class="fade-in" style="text-align: center; max-width: 800px; margin: 0 auto 60px; font-size: 1.2rem;">Une méthodologie éprouvée pour des résultats exceptionnels</p>
+            
+            <div class="process-steps">
+                <div class="process-step fade-in">
+                    <div class="step-number">1</div>
+                    <h4>Analyse</h4>
+                    <p>Audit complet de votre présence digitale et identification des opportunités de croissance.</p>
+                </div>
+                
+                <div class="process-step fade-in">
+                    <div class="step-number">2</div>
+                    <h4>Stratégie</h4>
+                    <p>Développement d'une roadmap personnalisée avec des objectifs clairs et mesurables.</p>
+                </div>
+                
+                <div class="process-step fade-in">
+                    <div class="step-number">3</div>
+                    <h4>Implémentation</h4>
+                    <p>Déploiement des solutions avec un suivi rigoureux des performances.</p>
+                </div>
+                
+                <div class="process-step fade-in">
+                    <div class="step-number">4</div>
+                    <h4>Optimisation</h4>
+                    <p>Amélioration continue basée sur les données et les résultats obtenus.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2 class="section-title fade-in">Notre Approche</h2>
+                    <p class="fade-in">Chez DIGIONYX, nous combinons créativité et technologie pour offrir des solutions digitales qui font la différence. Notre équipe d'experts travaille sans relâche pour sculpter l'innovation au service de votre croissance.</p>
+                    <p class="fade-in">De la visibilité à la conversion, nous accompagnons chaque étape de votre parcours digital avec des stratégies data-driven et des outils performants.</p>
+                    
+                    <div class="stats">
+                        <div class="stat-item fade-in">
+                            <div class="stat-number">150+</div>
+                            <div class="stat-label">Projets réalisés</div>
+                        </div>
+                        <div class="stat-item fade-in">
+                            <div class="stat-number">95%</div>
+                            <div class="stat-label">Clients satisfaits</div>
+                        </div>
+                        <div class="stat-item fade-in">
+                            <div class="stat-number">3x</div>
+                            <div class="stat-label">ROI moyen</div>
+                        </div>
+                    </div>
+                    
+                    <a href="#contact" class="cta-button fade-in">Travaillons ensemble</a>
+                </div>
+                
+                <div class="about-image fade-in">
+                    <div class="about-image-decoration"></div>
+                    <div class="about-image-main">
+                        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80" alt="Équipe DIGIONYX">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio" id="portfolio">
+        <div class="container">
+            <h2 class="section-title fade-in">Nos Réalisations</h2>
+            <p class="fade-in" style="text-align: center; max-width: 800px; margin: 0 auto 60px; font-size: 1.2rem;">Découvrez quelques-uns de nos projets récents</p>
+            
+            <div class="portfolio-grid">
+                <div class="portfolio-item fade-in">
+                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80" alt="Projet 1" class="portfolio-image">
+                    <div class="portfolio-overlay">
+                        <h3 class="portfolio-title">Campagne Growth</h3>
+                        <p class="portfolio-category">E-commerce</p>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item fade-in">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80" alt="Projet 2" class="portfolio-image">
+                    <div class="portfolio-overlay">
+                        <h3 class="portfolio-title">Stratégie Content</h3>
+                        <p class="portfolio-category">SaaS</p>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item fade-in">
+                    <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80" alt="Projet 3" class="portfolio-image">
+                    <div class="portfolio-overlay">
+                        <h3 class="portfolio-title">Automation CRM</h3>
+                        <p class="portfolio-category">Services B2B</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title fade-in">Ils nous font confiance</h2>
+            <p class="fade-in" style="text-align: center; max-width: 800px; margin: 0 auto 60px; font-size: 1.2rem;">Ce que nos clients disent de nous</p>
+            
+            <div class="testimonials-slider">
+                <div class="testimonial fade-in">
+                    <div class="testimonial-content">
+                        <p>DIGIONYX a complètement transformé notre présence digitale. Leur approche data-driven nous a permis d'augmenter nos conversions de 180% en seulement 6 mois. Une équipe professionnelle et à l'écoute de nos besoins.</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="Sarah L.">
+                        </div>
+                        <div class="author-info">
+                            <h5>Sarah L.</h5>
+                            <p>Directrice Marketing, LuxeBrand</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h2 class="fade-in">Prêt à booster votre croissance?</h2>
+                    <p class="fade-in">Que vous ayez un projet précis en tête ou que vous cherchiez simplement des conseils, notre équipe est à votre écoute. Contactez-nous pour une consultation gratuite.</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item fade-in">
+                            <div class="contact-icon">📧</div>
+                            <div class="contact-text">
+                                <h4>Email</h4>
+                                <p>contact@digionyx.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item fade-in">
+                            <div class="contact-icon">📱</div>
+                            <div class="contact-text">
+                                <h4>Téléphone</h4>
+                                <p>+33 1 23 45 67 89</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item fade-in">
+                            <div class="contact-icon">🏢</div>
+                            <div class="contact-text">
+                                <h4>Bureau</h4>
+                                <p>15 Rue du Digital, 75000 Paris</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form fade-in">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Nom complet</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Comment pouvons-nous vous aider?</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <button type="submit" class="cta-button">Envoyer le message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>DIGIONYX</h3>
+                    <p>La puissance du digital, sculptée dans l'innovation. Nous aidons les marques à se développer rapidement grâce à des stratégies innovantes et des outils digitaux puissants.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="LinkedIn">🔗</a>
+                        <a href="#" aria-label="Twitter">🐦</a>
+                        <a href="#" aria-label="Instagram">📷</a>
+                        <a href="#" aria-label="Facebook">👍</a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#services">Growth Marketing</a></li>
+                        <li><a href="#services">Automation</a></li>
+                        <li><a href="#services">Contenu Optimisé</a></li>
+                        <li><a href="#services">Stratégie Digitale</a></li>
+                        <li><a href="#services">Branding</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Navigation</h3>
+                    <ul>
+                        <li><a href="#home">Accueil</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#process">Processus</a></li>
+                        <li><a href="#about">À propos</a></li>
+                        <li><a href="#portfolio">Portfolio</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li>15 Rue du Digital</li>
+                        <li>75000 Paris, France</li>
+                        <li>contact@digionyx.com</li>
+                        <li>+33 1 23 45 67 89</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 DIGIONYX. Tous droits réservés. | <a href="#" style="color: #94a3b8;">Mentions légales</a> | <a href="#" style="color: #94a3b8;">Politique de confidentialité</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+            mobileMenuBtn.textContent = mainNav.classList.contains('active') ? '✕' : '☰';
+        });
+
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                if (this.getAttribute('href') === '#') return;
+                
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 90,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (mainNav.classList.contains('active')) {
+                        mainNav.classList.remove('active');
+                        mobileMenuBtn.textContent = '☰';
+                    }
+                }
+            });
+        });
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+        // Check for saved theme preference or use system preference
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
+            document.body.classList.add('dark-mode');
+            themeIcon.textContent = '☀️';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const theme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
+            localStorage.setItem('theme', theme);
+            themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+        });
+
+        // Form Submission
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            // Here you would typically send the form data to a server
+            console.log('Form submitted:', { name, email, message });
+            
+            // Show success message
+            alert('Merci pour votre message! Nous vous contacterons bientôt.');
+            
+            // Reset form
+            contactForm.reset();
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!mainNav.contains(e.target) && e.target !== mobileMenuBtn) {
+                mainNav.classList.remove('active');
+                mobileMenuBtn.textContent = '☰';
+            }
+        });
+
+        // Scroll animations
+        const fadeElements = document.querySelectorAll('.fade-in');
+
+        const appearOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -100px 0px"
+        };
+
+        const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('visible');
+                appearOnScroll.unobserve(entry.target);
+            });
+        }, appearOptions);
+
+        fadeElements.forEach(fadeElement => {
+            appearOnScroll.observe(fadeElement);
+        });
+
+        // Floating animation for elements with float class
+        const floatElements = document.querySelectorAll('.float');
+        floatElements.forEach((el, index) => {
+            el.style.animationDelay = `${index * 0.2}s`;
+        });
+    </script>
+</body>
+</html>
