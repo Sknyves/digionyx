@@ -114,6 +114,10 @@
         nav {
             max-width: 100%;
             overflow-x: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
         }
 
 
@@ -154,6 +158,16 @@
         nav ul li a:hover {
             color: var(--primary-color);
         }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            flex-wrap: wrap;
+            gap: 30px; /* Espacement entre les éléments */
+            padding: 0;
+            margin: 0;
+        }
+
 
         .mobile-menu-btn i {
             transition: transform 0.3s ease;
@@ -1249,7 +1263,7 @@
             <a href="#" class="logo">DIGI<span>ONYX</span></a>
             <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fa-solid fa-bars" id="menuIcon" aria-label="Menu"></i></button>
             <nav id="mainNav">
-                <ul>
+                <ul class="nav-links">
                     <li><a href="#home">Accueil</a></li>
                     <li><a href="#services">Services</a></li>
                     <li><a href="#process">Processus</a></li>
