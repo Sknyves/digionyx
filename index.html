@@ -10,6 +10,7 @@
     <style>
         :root {
             --primary-color: #2563eb; /* Bleu vif */
+            --icon-color: #2563eb; /* Bleu vif */
             --secondary-color: #1e293b; /* Bleu foncé */
             --accent-color: #3b82f6; /* Bleu moyen */
             --text-color: #1e293b; /* Noir bleuté */
@@ -20,6 +21,7 @@
         }
 
         .dark-mode {
+            --icon-color: #f8fafc; /* Bleu vif */
             --primary-color: #3b82f6; /* Bleu plus clair en dark mode */
             --secondary-color: #f8fafc; /* Blanc cassé */
             --accent-color: #60a5fa; /* Bleu plus clair */
@@ -151,6 +153,15 @@
         nav ul li a:hover {
             color: var(--primary-color);
         }
+
+        .mobile-menu-btn i {
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-menu-btn:hover i {
+            transform: rotate(90deg);
+        }
+
 
         .mobile-menu-btn {
             display: none;
@@ -392,7 +403,7 @@
         .service-icon {
             font-size: 3rem;
             margin-bottom: 25px;
-            color: var(--primary-color);
+            color: var(--icon-color);
             display: inline-block;
             transition: transform 0.3s ease;
         }
@@ -1235,7 +1246,7 @@
     <header>
         <div class="container header-container">
             <a href="#" class="logo">DIGI<span>ONYX</span></a>
-            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+            <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fa-solid fa-bars" id="menuIcon" aria-label="Menu"></i></button>
             <nav id="mainNav">
                 <ul>
                     <li><a href="#home">Accueil</a></li>
@@ -1549,34 +1560,44 @@
         // Mobile Menu Toggle
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const mainNav = document.getElementById('mainNav');
+        const menuIcon = document.getElementById('menuIcon');
 
         mobileMenuBtn.addEventListener('click', () => {
             mainNav.classList.toggle('active');
-            mobileMenuBtn.textContent = mainNav.classList.contains('active') ? '✕' : '☰';
+
+            // Remplacer l’icône
+            if (mainNav.classList.contains('active')) {
+                menuIcon.classList.replace('fa-bars', 'fa-xmark');
+            } else {
+                menuIcon.classList.replace('fa-xmark', 'fa-bars');
+            }
         });
 
         // Smooth Scrolling for Anchor Links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
-                
+
                 if (this.getAttribute('href') === '#') return;
-                
+
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
                     window.scrollTo({
                         top: target.offsetTop - 90,
                         behavior: 'smooth'
                     });
-                    
-                    // Close mobile menu if open
+
+                    // Fermer le menu mobile s'il est ouvert
                     if (mainNav.classList.contains('active')) {
                         mainNav.classList.remove('active');
-                        mobileMenuBtn.textContent = '☰';
+
+                        // Mise à jour de l’icône burger
+                        menuIcon.classList.replace('fa-xmark', 'fa-bars');
                     }
                 }
             });
         });
+
 
         // Theme Toggle
         const themeToggle = document.getElementById('themeToggle');
