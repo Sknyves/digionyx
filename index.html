@@ -2143,6 +2143,30 @@
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
+        // Configuration de la connexion à la base de données
+        const DATABASE_URL = 'postgres://neondb_owner:npg_hvlTQeKx8u7O@ep-dry-river-abjh4z4w-pooler.eu-west-2.aws.neon.tech/neondb?sslmode=require';
+
+        // Fonction pour envoyer les données à l'API
+        async function sendFormData(endpoint, data) {
+            try {
+                const response = await fetch(endpoint, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Erreur réseau');
+                }
+                
+                return await response.json();
+            } catch (error) {
+                console.error('Erreur:', error);
+                throw error;
+            }
+        }
         // Initialize loader
         window.addEventListener('load', () => {
             setTimeout(() => {
@@ -2228,6 +2252,7 @@
                             resize: true
                         },
                         modes: {
+
                             grab: {
                                 distance: 140,
                                 line_linked: {
@@ -2421,56 +2446,66 @@
 
         // Form Submission
         const contactForm = document.getElementById('contactForm');
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form values
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-            
-            // Here you would typically send the form data to a server
-            console.log('Form submitted:', { name, email, message });
-            
-            // Show success message
-            showNotification('Merci pour votre message! Nous vous contacterons bientôt.', 'success');
-            
-            // Reset form
-            contactForm.reset();
-        });
-
-        // Form Submission for Internship
-        const internshipForm = document.getElementById('internshipForm');
-        internshipForm.addEventListener('submit', function(e) {
+        contactForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             
             // Get form values
             const formData = {
-                type: document.querySelector('input[name="internship_type"]:checked').value,
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                message: document.getElementById('message').value
+            };
+            
+            try {
+                // Envoyer les données à l'API
+                await sendFormData('/api/contact', formData);
+                
+                // Show success message
+                showNotification('Merci pour votre message! Nous vous contacterons bientôt.', 'success');
+                
+                // Reset form
+                contactForm.reset();
+            } catch (error) {
+                showNotification('Une erreur s\'est produite. Veuillez réessayer.', 'error');
+            }
+        });
+
+        // Form Submission for Internship
+        const internshipForm = document.getElementById('internshipForm');
+        internshipForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const formData = {
+                internship_type: document.querySelector('input[name="internship_type"]:checked').value,
                 name: document.getElementById('internship-name').value,
                 email: document.getElementById('internship-email').value,
                 phone: document.getElementById('internship-phone').value,
                 school: document.getElementById('internship-school').value,
                 field: document.getElementById('internship-field').value,
                 period: document.getElementById('internship-period').value,
-                duration: document.getElementById('internship-duration').value,
+                duration: parseInt(document.getElementById('internship-duration').value),
                 motivation: document.getElementById('internship-motivation').value,
-                cv: document.getElementById('internship-cv').value
+                cv_url: document.getElementById('internship-cv').value
             };
             
-            // Here you would typically send the form data to a server
-            console.log('Internship Form submitted:', formData);
-            
-            // Show success message
-            showNotification('Merci pour votre candidature! Nous examinerons votre demande et vous contacterons sous peu.', 'success');
-            
-            // Reset form
-            internshipForm.reset();
+            try {
+                // Envoyer les données à l'API
+                await sendFormData('/api/internship', formData);
+                
+                // Show success message
+                showNotification('Merci pour votre candidature! Nous examinerons votre demande et vous contacterons sous peu.', 'success');
+                
+                // Reset form
+                internshipForm.reset();
+            } catch (error) {
+                showNotification('Une erreur s\'est produite. Veuillez réessayer.', 'error');
+            }
         });
 
         // Form Submission for Quote
         const quoteForm = document.getElementById('quoteForm');
-        quoteForm.addEventListener('submit', function(e) {
+        quoteForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             
             // Get form values
@@ -2483,17 +2518,21 @@
                 budget: document.getElementById('quote-budget').value,
                 deadline: document.getElementById('quote-deadline').value,
                 details: document.getElementById('quote-details').value,
-                files: document.getElementById('quote-files').value
+                files_url: document.getElementById('quote-files').value
             };
             
-            // Here you would typically send the form data to a server
-            console.log('Quote Form submitted:', formData);
-            
-            // Show success message
-            showNotification('Merci pour votre demande de devis! Notre équipe vous contactera dans les 48 heures avec une estimation personnalisée.', 'success');
-            
-            // Reset form
-            quoteForm.reset();
+            try {
+                // Envoyer les données à l'API
+                await sendFormData('/api/quote', formData);
+                
+                // Show success message
+                showNotification('Merci pour votre demande de devis! Notre équipe vous contactera dans les 48 heures avec une estimation personnalisée.', 'success');
+                
+                // Reset form
+                quoteForm.reset();
+            } catch (error) {
+                showNotification('Une erreur s\'est produite. Veuillez réessayer.', 'error');
+            }
         });
 
         // Close mobile menu when clicking outside
@@ -2569,5 +2608,6 @@
             img.setAttribute('loading', 'lazy');
         });
     </script>
+    
 </body>
 </html>
